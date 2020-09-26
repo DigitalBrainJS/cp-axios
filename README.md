@@ -4,7 +4,7 @@
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/cp-axios)
 ![David](https://img.shields.io/david/DigitalBrainJS/cp-axios)
 
-##Table of contents
+## Table of contents
 - [SYNOPSIS](#synopsis-sparkles)
 - [Installation](#installation-hammer)
 - [CDN bundle](#cdn-bundle)
@@ -71,7 +71,7 @@ module global export- `cpAxios`
  const cpAxios= require('cp-axios');
  const CPromise= require('c-promise2');
 
-// you could to use any other AbortController implementation, but CPromise already provides it
+ // you could use any other AbortController implementation, but CPromise already provides it
  const abortController = new CPromise.AbortController();
  const {signal} = abortController;
  
