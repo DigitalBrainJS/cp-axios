@@ -9,12 +9,13 @@
 - [Installation](#installation-hammer)
 - [CDN bundle](#cdn-bundle)
 - [Usage examples](#usage-examples)
-    - [Request aborting using CPromise cancelation API](#request-aborting-using-cpromise-cancelation-api)
+    - [Request aborting using CPromise cancellation  API](#request-aborting-using-cpromise-cancellation -api)
     - [Request aborting using AbortController signal](#request-aborting-using-abortcontroller-signal)
     - [Request aborting using Axios cancelToken](#request-aborting-using-axios-canceltoken)
     - [Using generators as async functions](#using-generators-as-async-functions)
     - [Abortable concurrent requests](#abortable-concurrent-requests)
 - [API Reference](#api-reference)    
+- [Related projects](#related-projects)    
 - [License](#license)    
 
 
@@ -22,10 +23,10 @@
 
 **cpAxios** is a simple [axios](https://www.npmjs.com/package/axios) wrapper that provides an advanced cancellation api.
 
-This library supports three types of the cancelation API that could be used *simultaneously*:
+This library supports three types of the cancellation  API that could be used *simultaneously*:
 - Axios [cancelableToken](https://github.com/axios/axios#cancellation)
 - [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) signal
-- [CPromise](https://www.npmjs.com/package/c-promise2) promise cancelation API 
+- [CPromise](https://www.npmjs.com/package/c-promise2) promise cancellation  API 
 
 ## Installation :hammer:
 
@@ -49,9 +50,10 @@ module global export- `cpAxios`
 
 [Live browser example](https://codesandbox.io/s/mutable-breeze-wdyp)
 
-#### Request aborting using CPromise cancelation API:
+#### Request aborting using CPromise cancellation  API:
 ````javascript
  const cpAxios= require('cp-axios');
+ const url= 'https://run.mocky.io/v3/753aa609-65ae-4109-8f83-9cfe365290f0?mocky-delay=5s';
 
  const chain = cpAxios(url)
       .timeout(5000)
@@ -70,6 +72,7 @@ module global export- `cpAxios`
 ````javascript
  const cpAxios= require('cp-axios');
  const CPromise= require('c-promise2');
+ const url= 'https://run.mocky.io/v3/753aa609-65ae-4109-8f83-9cfe365290f0?mocky-delay=5s';
 
  // you could use any other AbortController implementation, but CPromise already provides it
  const abortController = new CPromise.AbortController();
@@ -91,11 +94,10 @@ module global export- `cpAxios`
 #### Request aborting using Axios cancelToken:
 ````javascript
  const cpAxios= require('cp-axios');
- const CPromise= require('c-promise2');
-
+ const url= 'https://run.mocky.io/v3/753aa609-65ae-4109-8f83-9cfe365290f0?mocky-delay=5s';
  const source = cpAxios.CancelToken.source();
  
- const chain = cpAxios(url, {cancelToken: source.token})
+ cpAxios(url, {cancelToken: source.token})
       .timeout(5000)
       .then(request => {
           console.log(`Done: ${JSON.stringify(request.json())}`)
@@ -162,6 +164,12 @@ Options:
 - `...nativeAxiosOptions`- other options supported by [axios](https://www.npmjs.com/package/axios) package
 
 Learn more about [CPromise](https://www.npmjs.com/package/c-promise2) features 
+
+## Related projects
+
+- [cp-fetch](https://www.npmjs.com/package/cp-fetch) - fetch with timeouts and promise cancellation 
+- [c-promise2](https://www.npmjs.com/package/c-promise2) - promise with cancellation and progress capturing support 
+
 ## License
 
 The MIT License Copyright (c) 2020 Dmitriy Mozgovoy robotshara@gmail.com
