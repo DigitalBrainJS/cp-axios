@@ -4,7 +4,7 @@
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/cp-axios)
 ![David](https://img.shields.io/david/DigitalBrainJS/cp-axios)
 
-## Table of contents
+## Table of contents :page_with_curl:
 - [SYNOPSIS](#synopsis-sparkles)
 - [Installation](#installation-hammer)
 - [CDN bundle](#cdn-bundle)
@@ -39,7 +39,7 @@ $ yarn add cp-axios
 
 ### CDN bundle
 
-- [production UMD bundle](https://unpkg.com/cp-axios) (or [minified](https://unpkg.com/cp-axios/dist/cp-axios.umd.min.js) ~31KB)
+- [production UMD bundle](https://unpkg.com/cp-axios) (or [minified](https://unpkg.com/cp-axios/dist/cp-axios.umd.min.js) ~45KB)
 
 module global export- `cpAxios`
 
@@ -135,8 +135,8 @@ const CPromise = require('c-promise2');
 
 // same as cpAxios.all([...])
 const chain= CPromise.all([
-    cpFetch("https://run.mocky.io/v3/753aa609-65ae-4109-8f83-9cfe365290f0?mocky-delay=3s"),
-    cpFetch("https://run.mocky.io/v3/30a97b24-ed0e-46e8-9f78-8f954aead2f8?mocky-delay=5s")
+    cpAxios("https://run.mocky.io/v3/753aa609-65ae-4109-8f83-9cfe365290f0?mocky-delay=3s"),
+    cpAxios("https://run.mocky.io/v3/30a97b24-ed0e-46e8-9f78-8f954aead2f8?mocky-delay=5s")
 ]).timeout(10000).then(responses=> {
     console.log(`Results :`, responses);
 }, function (err) {
