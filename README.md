@@ -9,7 +9,7 @@
 - [Installation](#installation-hammer)
 - [CDN bundle](#cdn-bundle)
 - [Usage examples](#usage-examples)
-    - [Request aborting using CPromise cancellation  API](#request-aborting-using-cpromise-cancellation -api)
+    - [Request aborting using CPromise cancellation  API](#request-aborting-using-cpromise-cancellation-api)
     - [Request aborting using AbortController signal](#request-aborting-using-abortcontroller-signal)
     - [Request aborting using Axios cancelToken](#request-aborting-using-axios-canceltoken)
     - [Using generators as async functions](#using-generators-as-async-functions)
@@ -48,9 +48,9 @@ module global export- `cpAxios`
 
 #### Live Example
 
-[Live browser example](https://codesandbox.io/s/mutable-breeze-wdyp)
+[Live browser example](https://codesandbox.io/s/strange-almeida-1lcjj)
 
-#### Request aborting using CPromise cancellation  API:
+#### Request aborting using CPromise cancellation API:
 ````javascript
  const cpAxios= require('cp-axios');
  const url= 'https://run.mocky.io/v3/753aa609-65ae-4109-8f83-9cfe365290f0?mocky-delay=5s';
@@ -87,7 +87,7 @@ module global export- `cpAxios`
       });
 
  setTimeout(() => {
-    chain.cancel();
+    abortController.abort();
  }, 500);
 ````
 
@@ -145,7 +145,7 @@ const chain= CPromise.all([
     console.warn(`We got an error: ${err}`);
 });
 
-// other request will aborted if one fails
+// other request will be aborted if one fails
 
 // setTimeout(()=> chain.cancel(), 1000); // abort the request after 1000ms 
 ````
