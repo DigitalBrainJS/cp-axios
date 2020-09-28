@@ -58,7 +58,7 @@ module global export- `cpAxios`
  const chain = cpAxios(url)
       .timeout(5000)
       .then(request => {
-          console.log(`Done: ${JSON.stringify(request.json())}`)
+          console.log(`Done: ${JSON.stringify(request.data)}`)
       }, err => {
           console.warn(`Request failed: ${err}`)
       });
@@ -78,10 +78,10 @@ module global export- `cpAxios`
  const abortController = new CPromise.AbortController();
  const {signal} = abortController;
  
- const chain = cpAxios(url, {signal})
+ cpAxios(url, {signal})
       .timeout(5000)
       .then(request => {
-          console.log(`Done: ${JSON.stringify(request.json())}`)
+          console.log(`Done: ${JSON.stringify(request.data)}`)
       }, err => {
           console.warn(`Request failed: ${err}`)
       });
@@ -100,7 +100,7 @@ module global export- `cpAxios`
  cpAxios(url, {cancelToken: source.token})
       .timeout(5000)
       .then(request => {
-          console.log(`Done: ${JSON.stringify(request.json())}`)
+          console.log(`Done: ${JSON.stringify(request.data)}`)
       }, err => {
           console.warn(`Request failed: ${err}`)
       });
@@ -140,14 +140,14 @@ const chain= CPromise.all([
     cpAxios("https://run.mocky.io/v3/753aa609-65ae-4109-8f83-9cfe365290f0?mocky-delay=3s"),
     cpAxios("https://run.mocky.io/v3/30a97b24-ed0e-46e8-9f78-8f954aead2f8?mocky-delay=5s")
 ]).timeout(10000).then(responses=> {
-    console.log(`Results :`, responses);
+    console.log(`Results :`, responses[0].data, responses[1].data);
 }, function (err) {
     console.warn(`We got an error: ${err}`);
 });
 
 // other request will be aborted if one fails
 
-// setTimeout(()=> chain.cancel(), 1000); // abort the request after 1000ms 
+ setTimeout(()=> chain.cancel(), 1000); // abort the request after 1000ms 
 ````
 
 ## API Reference
