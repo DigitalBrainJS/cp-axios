@@ -57,8 +57,8 @@ module global export- `cpAxios`
 
  const chain = cpAxios(url)
       .timeout(5000)
-      .then(request => {
-          console.log(`Done: ${JSON.stringify(request.data)}`)
+      .then(response => {
+          console.log(`Done: ${JSON.stringify(response.data)}`)
       }, err => {
           console.warn(`Request failed: ${err}`)
       });
@@ -80,8 +80,8 @@ module global export- `cpAxios`
  
  cpAxios(url, {signal})
       .timeout(5000)
-      .then(request => {
-          console.log(`Done: ${JSON.stringify(request.data)}`)
+      .then(response => {
+          console.log(`Done: ${JSON.stringify(response.data)}`)
       }, err => {
           console.warn(`Request failed: ${err}`)
       });
@@ -99,8 +99,8 @@ module global export- `cpAxios`
  
  cpAxios(url, {cancelToken: source.token})
       .timeout(5000)
-      .then(request => {
-          console.log(`Done: ${JSON.stringify(request.data)}`)
+      .then(response => {
+          console.log(`Done: ${JSON.stringify(response.data)}`)
       }, err => {
           console.warn(`Request failed: ${err}`)
       });
