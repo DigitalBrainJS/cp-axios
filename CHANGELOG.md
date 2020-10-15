@@ -8,6 +8,11 @@ For changes before version 0.1.6, please see the commit history
 
 ## [0.1.6] - 2020-10-15
 
+### Updated
+- dependencies
+
+## [0.1.6] - 2020-10-15
+
 ### Added
 - progress capturing via CPromise api
 
