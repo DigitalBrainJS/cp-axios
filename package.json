@@ -67,5 +67,33 @@
     "nyc": "^15.1.0",
     "rollup": "^2.26.10",
     "rollup-plugin-terser": "^7.0.2"
+  },
+  "nyc": {
+    "lines": 60,
+    "functions": 60,
+    "branches": 60,
+    "statements": 60,
+    "watermarks": {
+      "lines": [
+        80,
+        95
+      ],
+      "functions": [
+        80,
+        95
+      ],
+      "branches": [
+        80,
+        95
+      ],
+      "statements": [
+        80,
+        95
+      ]
+    },
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ]
   }
 }
