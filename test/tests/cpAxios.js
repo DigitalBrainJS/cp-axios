@@ -1,5 +1,5 @@
 const assert = require('assert');
-const CPromise = require('c-promise2');
+const {CPromise} = require('c-promise2');
 const cpAxios = require('../../lib/index');
 
 describe('cpAxios', function () {

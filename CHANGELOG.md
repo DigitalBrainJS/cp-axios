@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 For changes before version 0.1.6, please see the commit history
 
+## [0.1.8] - 2020-12-07
+
+### Updated
+- dependencies
+
+## [0.1.7] - 2020-10-15
+
+### Updated
+- dependencies
+
 ## [0.1.6] - 2020-10-15
 
 ### Updated
