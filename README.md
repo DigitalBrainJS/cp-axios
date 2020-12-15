@@ -155,7 +155,7 @@ const chain= CPromise.all([
 The package exports a wrapped version of the axios instance. 
 See the axios [documentation](https://www.npmjs.com/package/axios#axios) to gen more information.
 
-`cpAxios(url, {signal, ...nativeFetchOptions}): CPromise`
+`cpAxios(url, {signal, ...nativeAxiosOptions}): CPromise`
 
 Options:
 
