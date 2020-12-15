@@ -40,7 +40,7 @@ const config = mode === 'development' ? [
                 banner
             },
             plugins: [
-                resolve(),
+                resolve({browser: true}),
                 commonjs(),
                 json()
             ]
@@ -55,7 +55,7 @@ const config = mode === 'development' ? [
                 banner
             },
             plugins: [
-                resolve(),
+                resolve({browser: true}),
                 commonjs(),
                 json(),
                 terser()

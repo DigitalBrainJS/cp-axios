@@ -39,7 +39,7 @@ $ yarn add cp-axios
 ```
 
 ### CDN bundle
-
+Browser UMD bundle (with all dependencies inside):
 - [production UMD bundle](https://unpkg.com/cp-axios) (or [minified](https://unpkg.com/cp-axios/dist/cp-axios.umd.min.js) ~45KB)
 
 module global export- `cpAxios`
