@@ -28,14 +28,22 @@ This library supports three types of the cancellation  API that could be used *s
 - [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) signal
 - [CPromise](https://www.npmjs.com/package/c-promise2) promise cancellation  API 
 
+In addition, since cpAxios return a custom promise instead of the native, you get some powers of [CPromise](https://www.npmjs.com/package/c-promise2):
+- concurrency limiting fot creating request queues
+- progress capturing
+- promise timeouts
+
 ## Installation :hammer:
 
+Starting from version `0.1.12` the package imports peer dependencies instead of built-in.
+So, you should install `c-promise2` and `axios` packages manually using the following command:
+
 ```bash
-$ npm install cp-axios
+$ npm install cp-axios c-promise2 axios
 ```
 
 ```bash
-$ yarn add cp-axios
+$ yarn add cp-axios  c-promise2 axios
 ```
 
 ### CDN bundle
@@ -63,9 +71,7 @@ module global export- `cpAxios`
           console.warn(`Request failed: ${err}`)
       });
 
- setTimeout(() => {
-    chain.cancel();
- }, 500);
+ setTimeout(() => chain.cancel(), 500);
 ````
 
 #### Request aborting using AbortController signal:
@@ -86,9 +92,7 @@ module global export- `cpAxios`
           console.warn(`Request failed: ${err}`)
       });
 
- setTimeout(() => {
-    abortController.abort();
- }, 500);
+ setTimeout(() => abortController.abort(), 500);
 ````
 
 #### Request aborting using Axios cancelToken:
@@ -105,9 +109,7 @@ module global export- `cpAxios`
           console.warn(`Request failed: ${err}`)
       });
 
- setTimeout(() => {
-    source.cancel();
- }, 500);
+ setTimeout(() => source.cancel(), 500);
 ````
 
 #### Using generators as async functions:
@@ -147,13 +149,48 @@ const chain= CPromise.all([
 
 // other request will be aborted if one fails
 
- setTimeout(()=> chain.cancel(), 1000); // abort the request after 1000ms 
+ setTimeout(()=> chain.cancel(), 1000); // abort the requests after 1000ms 
+````
+
+Making a request queue using mapper function with concurrency limit and progress capturing 
+[Live Demo](https://codesandbox.io/s/cpromise-all-concurrent-generatorforked-k0fjk?file=/src/index.js):
+````javascript
+import { CPromise } from "c-promise2";
+import cpAxios from "cp-axios";
+
+const promise = CPromise.all(
+  [
+    "https://run.mocky.io/v3/7b038025-fc5f-4564-90eb-4373f0721822?mocky-delay=2s&x=1",
+    "https://run.mocky.io/v3/7b038025-fc5f-4564-90eb-4373f0721822?mocky-delay=2s&x=2",
+    "https://run.mocky.io/v3/7b038025-fc5f-4564-90eb-4373f0721822?mocky-delay=2s&x=3",
+    "https://run.mocky.io/v3/7b038025-fc5f-4564-90eb-4373f0721822?mocky-delay=2s&x=4",
+    "https://run.mocky.io/v3/7b038025-fc5f-4564-90eb-4373f0721822?mocky-delay=2s&x=5",
+    "https://run.mocky.io/v3/7b038025-fc5f-4564-90eb-4373f0721822?mocky-delay=2s&x=6",
+    "https://run.mocky.io/v3/7b038025-fc5f-4564-90eb-4373f0721822?mocky-delay=2s&x=7"
+  ],
+  {
+    mapper: (url) => {
+      console.log(`Request [${url}]`);
+      return cpAxios(url);
+    },
+    concurrency: 2
+  }
+)
+  .innerWeight(7)
+  .progress((p) => console.log(`Progress: ${(p * 100).toFixed(1)}`))
+  .then(
+    (v) => console.log(`Done: `, v),
+    (e) => console.warn(`Failed: ${e}`)
+  );
+
+// yeah, we able to cancel the entire task and abort pending network requests
+//setTimeout(() => promise.cancel(), 4500);
 ````
 
 ## API Reference
 
 The package exports a wrapped version of the axios instance. 
-See the axios [documentation](https://www.npmjs.com/package/axios#axios) to gen more information.
+See the axios [documentation](https://www.npmjs.com/package/axios#axios) to get more information.
 
 `cpAxios(url, {signal, ...nativeAxiosOptions}): CPromise`
 

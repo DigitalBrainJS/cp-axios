@@ -21,6 +21,8 @@
   "scripts": {
     "test": "mocha ./test/runner.js --exit --timeout=3000",
     "test:watch": "nodemon --watch lib/ --watch ./test/tests --exec \\\"npm test\\\"",
+    "changelog": "auto-changelog -p",
+    "version": "npm run changelog  && git add CHANGELOG.md",
     "test:coverage": "nyc --check-coverage npm run test",
     "coverage:report": "nyc report --reporter=html --reporter=text",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
@@ -39,6 +41,7 @@
     "fetch",
     "ajax",
     "AbortController",
+    "CancelToken",
     "signal",
     "promise",
     "abortable",
@@ -50,22 +53,23 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.21.0",
-    "c-promise2": "^0.10.3"
+    "axios": ">=0.19.0",
+    "c-promise2": "^0.11.3"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-multi-entry": "*",
-    "@rollup/plugin-node-resolve": "^11.0.0",
+    "@rollup/plugin-node-resolve": "^11.2.0",
+    "auto-changelog": "^2.2.1",
     "coveralls": "^3.1.0",
     "cross-env": "^7.0.3",
-    "eslint": "^7.15.0",
-    "mocha": "^8.2.1",
-    "nodemon": "^2.0.6",
-    "npm": "^6.14.9",
+    "eslint": "^7.22.0",
+    "mocha": "^8.3.2",
+    "nodemon": "^2.0.7",
+    "npm": "^6.14.11",
     "nyc": "^15.1.0",
-    "rollup": "^2.34.2",
+    "rollup": "^2.42.3",
     "rollup-plugin-terser": "^7.0.2"
   },
   "nyc": {
