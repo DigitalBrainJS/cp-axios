@@ -1,6 +1,6 @@
 {
   "name": "cp-axios",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "axios wrapper that provides an advanced cancellation api",
   "author": {
     "name": "Dmitriy Mozgovoy",
