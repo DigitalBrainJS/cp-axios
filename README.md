@@ -1,4 +1,4 @@
-![Travis (.com)](https://img.shields.io/travis/com/DigitalBrainJS/cp-axios)
+[![Build Status](https://travis-ci.com/DigitalBrainJS/cp-axios.svg?branch=master)](https://travis-ci.com/DigitalBrainJS/cp-axios)
 [![Coverage Status](https://coveralls.io/repos/github/DigitalBrainJS/cp-axios/badge.svg?branch=master)](https://coveralls.io/github/DigitalBrainJS/cp-axios?branch=master)
 ![npm](https://img.shields.io/npm/dm/cp-axios)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/cp-axios)
