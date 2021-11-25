@@ -14,6 +14,7 @@
     - [Request aborting using Axios cancelToken](#request-aborting-using-axios-canceltoken)
     - [Using generators as async functions](#using-generators-as-async-functions)
     - [Abortable concurrent requests](#abortable-concurrent-requests)
+    - [React usage](#react-usage)
 - [API Reference](#api-reference)    
 - [Related projects](#related-projects)    
 - [License](#license)    
@@ -39,11 +40,11 @@ Starting from version `0.1.12` the package imports peer dependencies instead of 
 So, you should install `c-promise2` and `axios` packages manually using the following command:
 
 ```bash
-$ npm install cp-axios c-promise2 axios
+$ npm install cp-axios
 ```
 
 ```bash
-$ yarn add cp-axios  c-promise2 axios
+$ yarn add cp-axios
 ```
 
 ### CDN bundle
@@ -119,7 +120,7 @@ const cpAxios= require('cp-axios');
 const CPromise= require('c-promise2');
 const url= 'https://run.mocky.io/v3/753aa609-65ae-4109-8f83-9cfe365290f0?mocky-delay=5s';
 
-const chain= CPromise.from(function*(){
+const chain= CPromise.run(function*(){
     try{
         const response= yield cpAxios(url).timeout(5000);
         console.log(`Done: `, response.data)
@@ -186,6 +187,42 @@ const promise = CPromise.all(
 // yeah, we able to cancel the entire task and abort pending network requests
 //setTimeout(() => promise.cancel(), 4500);
 ````
+## React usage
+
+`cpAxios` can be easily used with React using the [`useAsyncEffect`](https://www.npmjs.com/package/use-async-effect2) hook, which allows canceled asynchronous functions to be executed as effects ([Live Demo](https://codesandbox.io/s/use-async-effect-axios-minimal-pdngg?file=/src/TestComponent.js)):
+
+```jsx
+import React from "react";
+import { useAsyncEffect } from "use-async-effect2";
+import cpAxios from "cp-axios";
+
+/*
+ Note: the related network request will also be aborted
+ Check out your network console
+ */
+
+function TestComponent({ url, timeout }) {
+  const [cancel, done, result, err] = useAsyncEffect(
+    function* () {
+      return (yield cpAxios(url).timeout(timeout)).data;
+    },
+    { states: true, deps: [url] }
+  );
+
+  return (
+    <div>
+      {done ? (err ? err.toString() : JSON.stringify(result)) : "loading..."}
+      <button onClick={cancel} disabled={done}>
+        Cancel async effect (abort request)
+      </button>
+    </div>
+  );
+}
+
+export default TestComponent;
+```
+
+The request will be automatically aborted when the effect is canceled / restarted.
 
 ## API Reference
 
