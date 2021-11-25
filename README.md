@@ -189,7 +189,7 @@ const promise = CPromise.all(
 ````
 ## React usage
 
-`cpAxios` can be easily used with React using the [`useAsyncEffect`](https://www.npmjs.com/package/use-async-effect2) hook, which allows canceled asynchronous functions to be executed as effects ([Live Demo](https://codesandbox.io/s/use-async-effect-axios-minimal-pdngg?file=/src/TestComponent.js)):
+`cpAxios` can be easily used with React using the [`useAsyncEffect`](https://www.npmjs.com/package/use-async-effect2) hook, which allows cancelable asynchronous functions to be executed as effects ([Live Demo](https://codesandbox.io/s/use-async-effect-axios-minimal-pdngg?file=/src/TestComponent.js)):
 
 ```jsx
 import React from "react";
